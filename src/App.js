@@ -1,25 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+
+export default function App() {
+const [Longday, setLongDay] = useState('');
+const [LongMonth, setLongMonth] = useState('');
+const [dayNum, setDayNum] = useState('');
+const [year,setYear]= useState('');
+useEffect(() => {
+  const date = new Date();
+  const formattedDay = date.toLocaleDateString("en",{weekday:"long"});
+  const formattedMonth = date.toLocaleDateString("en", {month:"long"});
+  const daynum = date.getDate();
+  const Year = date.getFullYear();
+  setYear(Year);
+  setDayNum(daynum);
+  setLongDay(formattedDay);
+  setLongMonth(formattedMonth);
+}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div id='Main-Container'>
+        <div id = 'Text'>
+        <p id='Month'>{LongMonth}</p>
+        <p id='Day'>{Longday}</p>
+        <p id='DayNum'>{dayNum}</p>
+        <p id='Year'>{year}</p>
+        </div>
+      </div>
+    </>
   );
 }
 
-export default App;
+
